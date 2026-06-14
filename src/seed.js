@@ -55,15 +55,16 @@ const initialSMTP = {
   host: process.env.SMTP_HOST || 'smtp.gmail.com',
   port: Number(process.env.SMTP_PORT) || 465,
   secure: process.env.SMTP_SECURE !== 'false',
-  username: process.env.SMTP_USER || '',
-  senderEmail: process.env.SMTP_FROM || process.env.SMTP_USER || '',
+  username: process.env.SMTP_USER || 'admin@agraharabhojanam.com',
+  senderEmail: process.env.SMTP_FROM || process.env.SMTP_USER || 'admin@agraharabhojanam.com',
+  password: process.env.SMTP_PASS || '',
 };
 
 const initialWhatsApp = {
   apiKey: 'EAA12093HBAJHBASDJASND89123612',
   phoneId: '331209745',
   routingMode: 'DirectWeb',
-  recipientNumber: '918838026509'
+  recipientNumber: '918778447165'
 };
 
 export async function seedDatabase(database) {
@@ -100,9 +101,33 @@ export async function seedDatabase(database) {
   if ((await configs.countDocuments({ _id: 'smtp' })) === 0) {
     await configs.insertOne({ _id: 'smtp', ...initialSMTP });
     console.log('Seeded SMTP config');
+  } else {
+    const smtp = await configs.findOne({ _id: 'smtp' });
+    const patch = {};
+    if (!smtp?.username?.trim()) {
+      patch.username =
+        smtp?.senderEmail?.trim() ||
+        initialSMTP.username;
+    }
+    if (!smtp?.senderEmail?.trim()) {
+      patch.senderEmail =
+        smtp?.username?.trim() ||
+        initialSMTP.senderEmail;
+    }
+    if (Object.keys(patch).length > 0) {
+      await configs.updateOne({ _id: 'smtp' }, { $set: patch });
+    }
   }
   if ((await configs.countDocuments({ _id: 'whatsapp' })) === 0) {
     await configs.insertOne({ _id: 'whatsapp', ...initialWhatsApp });
     console.log('Seeded WhatsApp config');
+  } else {
+    await configs.updateOne(
+      {
+        _id: 'whatsapp',
+        recipientNumber: { $in: ['919025672285', '918838026509', '9025672285', '8838026509'] },
+      },
+      { $set: { recipientNumber: initialWhatsApp.recipientNumber } },
+    );
   }
 }

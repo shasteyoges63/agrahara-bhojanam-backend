@@ -8,9 +8,14 @@ import { seedDatabase } from './seed.js';
 import { findUserByEmailOrPhone, normalizePhone } from './userUtils.js';
 import { jitterCoordinates, resolveLocationFromAddress } from './locationUtils.js';
 import {
+  enrichOrderWithProductImages,
+  getLastSmtpError,
   initEmailService,
+  isSmtpReady,
+  resolveSmtpConfig,
   sendContactNotificationEmail,
   sendOrderConfirmationEmail,
+  sendStoreOrderNotificationEmail,
   sendTestEmail,
 } from './email.js';
 
@@ -25,16 +30,51 @@ const PORT = Number(process.env.PORT) || 4000;
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:3001',
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:5001',
   'http://127.0.0.1:3000',
   'http://127.0.0.1:3001',
+  'http://127.0.0.1:5173',
+  'http://127.0.0.1:5174',
+  'http://127.0.0.1:5001',
   'https://agraharabhojanam.com',
   'https://www.agraharabhojanam.com',
 ];
 if (process.env.CORS_ORIGIN) {
   allowedOrigins.push(...process.env.CORS_ORIGIN.split(',').map((o) => o.trim()).filter(Boolean));
 }
-app.use(cors({ origin: allowedOrigins }));
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(null, false);
+    }
+  },
+  credentials: true,
+}));
 app.use(express.json());
+
+app.use((err, _req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+    return res.status(400).json({ error: 'Invalid JSON in request body.' });
+  }
+  return next(err);
+});
+
+app.get('/', (_req, res) => {
+  res.json({
+    name: 'Agrahara Bhojanam API',
+    status: 'running',
+    message: 'Use GET /api/orders to list orders, POST /api/orders to create one.',
+    docs: {
+      health: 'GET /api/health',
+      products: 'GET /api/products',
+      orders: 'GET /api/orders | POST /api/orders',
+    },
+  });
+});
 
 app.get('/api/health', async (_req, res) => {
   try {
@@ -238,7 +278,15 @@ app.get('/api/orders', async (_req, res) => {
 });
 
 app.post('/api/orders', async (req, res) => {
-  const order = enrichOrderWithLocation(req.body);
+  const body = req.body;
+  if (!body?.customerName?.trim()) {
+    return res.status(400).json({ error: 'customerName is required.' });
+  }
+  if (!Array.isArray(body?.items) || body.items.length === 0) {
+    return res.status(400).json({ error: 'Order must include at least one item.' });
+  }
+
+  const order = enrichOrderWithLocation(body);
   const db = getDB();
   const productsCol = db.collection('products');
 
@@ -254,11 +302,17 @@ app.post('/api/orders', async (req, res) => {
 
   await db.collection('orders').insertOne(order);
 
-  const emailSent = await sendOrderConfirmationEmail(order);
+  const orderForEmail = await enrichOrderWithProductImages(order, productsCol);
+
+  const emailSent = await sendOrderConfirmationEmail(orderForEmail);
   if (emailSent !== order.emailSent) {
     await db.collection('orders').updateOne({ id: order.id }, { $set: { emailSent } });
     order.emailSent = emailSent;
   }
+
+  sendStoreOrderNotificationEmail(orderForEmail).catch((err) => {
+    console.error('Store order email failed:', err instanceof Error ? err.message : err);
+  });
 
   res.status(201).json(order);
 });
@@ -351,31 +405,66 @@ app.delete('/api/contact-messages/:id', async (req, res) => {
 app.get('/api/config/smtp', async (_req, res) => {
   const doc = await getDB().collection('configs').findOne({ _id: 'smtp' });
   if (!doc) return res.status(404).json({ error: 'SMTP config not found' });
-  const { _id, ...config } = doc;
-  res.json(config);
+  const resolved = resolveSmtpConfig(doc);
+  const { _id, password, ...config } = doc;
+  res.json({
+    host: resolved?.host || config.host,
+    port: resolved?.port ?? config.port,
+    secure: resolved?.secure ?? config.secure,
+    username: resolved?.username || config.username,
+    senderEmail: resolved?.senderEmail || config.senderEmail,
+    hasPassword: Boolean(resolved?.password),
+    smtpReady: isSmtpReady(),
+    envConfigured: Boolean(process.env.SMTP_USER?.trim() && process.env.SMTP_PASS?.trim()),
+    ...(!isSmtpReady() && getLastSmtpError() ? { lastError: getLastSmtpError() } : {}),
+  });
 });
 
 app.put('/api/config/smtp', async (req, res) => {
-  const config = req.body;
+  const existing = await getDB().collection('configs').findOne({ _id: 'smtp' });
+  const incoming = { ...req.body };
+  delete incoming.hasPassword;
+
+  if (!incoming.username?.trim() && incoming.senderEmail?.trim()) {
+    incoming.username = incoming.senderEmail.trim();
+  }
+
+  if (!incoming.password?.trim() && existing?.password) {
+    incoming.password = existing.password;
+  }
+
   await getDB().collection('configs').updateOne(
     { _id: 'smtp' },
-    { $set: config },
+    { $set: incoming },
     { upsert: true }
   );
-  await initEmailService(getDB());
-  res.json(config);
+
+  const ready = await initEmailService(getDB());
+  const { _id, password, ...safe } = incoming;
+  res.json({ ...safe, hasPassword: Boolean(password?.trim()), smtpReady: ready });
 });
 
 app.post('/api/config/smtp/test', async (req, res) => {
   const { to } = req.body;
-  const recipient = to?.trim() || process.env.SMTP_USER?.trim() || process.env.SMTP_FROM?.trim();
+  const doc = await getDB().collection('configs').findOne({ _id: 'smtp' });
+  const recipient =
+    to?.trim() ||
+    process.env.SMTP_FROM?.trim() ||
+    process.env.SMTP_USER?.trim() ||
+    doc?.senderEmail?.trim();
+
   if (!recipient) {
-    return res.status(400).json({ error: 'Provide "to" email or set SMTP_USER in .env' });
+    return res.status(400).json({ error: 'Provide "to" email or set sender email in SMTP config.' });
   }
 
+  await initEmailService(getDB());
   const ok = await sendTestEmail(recipient);
   if (!ok) {
-    return res.status(503).json({ error: 'SMTP not ready. Check backend/.env and restart.' });
+    return res.status(503).json({
+      error:
+        getLastSmtpError() ||
+        'SMTP not ready. Set Gmail + App Password in backend/.env or Admin → SMTP & WhatsApp, then restart backend.',
+    });
   }
   res.json({ ok: true, sentTo: recipient });
 });

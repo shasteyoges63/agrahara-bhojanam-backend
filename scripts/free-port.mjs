@@ -20,18 +20,22 @@ function readPort() {
 const PORT = readPort();
 const isWin = process.platform === 'win32';
 
-function portOpen(port) {
-  return new Promise((resolve) => {
-    const socket = net.connect({ port, host: '127.0.0.1' }, () => {
-      socket.end();
-      resolve(true);
+async function portInUse(port) {
+  const check = (host) =>
+    new Promise((resolve) => {
+      const socket = net.connect({ port, host }, () => {
+        socket.end();
+        resolve(true);
+      });
+      socket.on('error', () => resolve(false));
+      socket.setTimeout(1000, () => {
+        socket.destroy();
+        resolve(false);
+      });
     });
-    socket.on('error', () => resolve(false));
-    socket.setTimeout(1000, () => {
-      socket.destroy();
-      resolve(false);
-    });
-  });
+  if (await check('127.0.0.1')) return true;
+  if (await check('::1')) return true;
+  return false;
 }
 
 function freePortWindows(port) {
@@ -63,9 +67,13 @@ function freePortUnix(port) {
 }
 
 async function main() {
-  if (!(await portOpen(PORT))) return;
-  if (isWin) freePortWindows(PORT);
-  else freePortUnix(PORT);
+  if (isWin) {
+    freePortWindows(PORT);
+    await new Promise((r) => setTimeout(r, 500));
+    return;
+  }
+  if (!(await portInUse(PORT))) return;
+  freePortUnix(PORT);
   await new Promise((r) => setTimeout(r, 500));
 }
 
