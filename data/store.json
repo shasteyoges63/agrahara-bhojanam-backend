@@ -1,0 +1,357 @@
+{
+  "products": [
+    {
+      "id": "prod-1",
+      "name": "Tamil Traditional Paruppu Podi (Lentil Powder)",
+      "description": "An authentic South Indian household specialty. Hand-roasted Toor Dal, Bengal Gram, pepper, and dry red chillies stone-milled to sandy-perfection and laced with high-purity garlic-free asafoetida (Hing). Mix with steaming rice and A2 Ghee.",
+      "price": 95,
+      "costPrice": 40,
+      "category": "Podi Varieties",
+      "images": [
+        "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?q=80&w=600&auto=format&fit=crop"
+      ],
+      "enabled": true,
+      "stock": 150,
+      "traditionalBenefit": "Supplies complete high plant protein, improves appetite, and stimulates healthy agni (digestive fire).",
+      "weight": "150g",
+      "ingredients": [
+        "Toor Dal (Pigeon Peas)",
+        "Bengal Gram (Chana Dal)",
+        "Black Pepper",
+        "Dry Red Chillies",
+        "Vedic Asafoetida",
+        "Unrefined Rock Salt"
+      ]
+    },
+    {
+      "id": "prod-2",
+      "name": "Organic Karuveppilai (Curry Leaves) Rice Podi",
+      "description": "Made from premium, iron-rich fresh curry leaves sourced from regional organic fields. Sun-dried carefully and dry-milled under strict temperature controls with black pepper, urad dal, and dry red chili to preserve its natural therapeutic essence.",
+      "price": 110,
+      "costPrice": 45,
+      "category": "Podi Varieties",
+      "images": [
+        "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=600&auto=format&fit=crop"
+      ],
+      "enabled": true,
+      "stock": 120,
+      "traditionalBenefit": "Rich in dietary iron and Vitamin A. Exceptional for hair growth, liver detoxification, and skin radiance.",
+      "weight": "150g",
+      "ingredients": [
+        "Fresh Organic Curry Leaves",
+        "Black Gram (Urad Dal)",
+        "Whole Red Chilies",
+        "Black Pepper",
+        "Asafoetida",
+        "Sea Salt"
+      ]
+    },
+    {
+      "id": "prod-3",
+      "name": "Traditional Idli Milagai Podi (Gunpowder)",
+      "description": "The definitive South Indian accompaniment for soft idlis and crispy dosas. Created with choice dual lentil dry-roasting, black sesame seeds, and hot Guntur chilies crushed coarsely to retain that traditional rustic bite.",
+      "price": 90,
+      "costPrice": 35,
+      "category": "Podi Varieties",
+      "images": [
+        "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?q=80&w=600&auto=format&fit=crop"
+      ],
+      "enabled": true,
+      "stock": 180,
+      "traditionalBenefit": "Boosts blood circulation, warms the throat, and delivers rich dietary fibers.",
+      "weight": "150g",
+      "ingredients": [
+        "Urad Dal",
+        "Bengal Gram",
+        "Guntur Red Chili",
+        "Stone-Ground Black Sesame Seeds",
+        "Pure Hing",
+        "Hygienic Sea Salt"
+      ]
+    },
+    {
+      "id": "prod-4",
+      "name": "Madurai Special Maavadu (Baby Mango) Pickle",
+      "description": "Our crown jewel. Tender baby mangoes hand-harvested during early morning dew, salted in heavy clay jars (Bharani) for several weeks, and cured in cold-pressed sesame oil, mustard dust, and hot red chili powder. A timeless memory.",
+      "price": 195,
+      "costPrice": 85,
+      "category": "Pickle Varieties",
+      "images": [
+        "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1466637574441-749b8f19452f?q=80&w=600&auto=format&fit=crop"
+      ],
+      "enabled": true,
+      "stock": 90,
+      "traditionalBenefit": "Stimulates digestive saliva, aids sluggish morning digests, and pairs exceptionally with cool curd rice.",
+      "weight": "300g",
+      "ingredients": [
+        "Tender Baby Mangoes",
+        "Cold-Pressed Sesame Oil (Gingelly)",
+        "Red Chili Powder",
+        "Coarse Mustard Yellow Powder",
+        "Asafoetida",
+        "Sea Salt"
+      ]
+    },
+    {
+      "id": "prod-5",
+      "name": "Traditional Citron (Narthangai) Pickle",
+      "description": "Heritage dietary cure. Tender local Citron rind carefully sliced, naturally brined, and sun-matured. Cooked in pure unrefined sesame oil with fenugreek spice layers. No vinegar, zero coloring chemical additions.",
+      "price": 145,
+      "costPrice": 60,
+      "category": "Pickle Varieties",
+      "images": [
+        "https://images.unsplash.com/photo-1466637574441-749b8f19452f?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=600&auto=format&fit=crop"
+      ],
+      "enabled": true,
+      "stock": 110,
+      "traditionalBenefit": "Extremely popular for soothing pitta-related issues, overcoming morning sickness, and aiding liver bile production.",
+      "weight": "250g",
+      "ingredients": [
+        "Fresh Native Citron (Narthangai)",
+        "Cold-Pressed Sesame Oil",
+        "Red Pepper Dust",
+        "Dry Fenugreek Powder",
+        "Hing",
+        "Sea Salt"
+      ]
+    },
+    {
+      "id": "prod-6",
+      "name": "Mulaikattiya Sathu Maavu (Sprouted Multi-Grain Mix)",
+      "description": "A traditional whole-family nutrition powder. Over 10 grains and legumes including Finger Millet, Pearl Millet, Sorghum, and Red Rice are sprouted, solar-dehydrated, gently hand-roasted, and stone-milled with aroma-rich dry ginger and green cardamom.",
+      "price": 240,
+      "costPrice": 110,
+      "category": "Porridge Mix",
+      "images": [
+        "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop"
+      ],
+      "enabled": true,
+      "stock": 85,
+      "traditionalBenefit": "High dietary fibers, natural complex carbs, calcium, and minerals. Excellent breakfast substitute for all ages.",
+      "weight": "500g",
+      "ingredients": [
+        "Sprouted Finger Millet (Ragi)",
+        "Sprouted Pearl Millet (Kambhu)",
+        "Sorghum (Cholam)",
+        "Mapillai Samba Red Rice",
+        "Moong Dal",
+        "Dry Ginger",
+        "Cardamom"
+      ]
+    },
+    {
+      "id": "prod-7",
+      "name": "Kovil Puliyodharai Mix (Traditional Tamarind Paste)",
+      "description": "Recreate the rich, divine taste of Srirangam temple tamarind rice at home. Prepared using concentrated, thick ripe tamarind extract slow-boiled in pure wood-pressed sesame oil with roasted black sesame seeds, peanuts, and freshly ground secret temple spices.",
+      "price": 165,
+      "costPrice": 75,
+      "category": "Instant Mix",
+      "images": [
+        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?q=80&w=600&auto=format&fit=crop"
+      ],
+      "enabled": true,
+      "stock": 130,
+      "traditionalBenefit": "Balances kapha and vata, stimulates stomach juices, and serves as an ideal travel food with a long shelf life.",
+      "weight": "250g",
+      "ingredients": [
+        "Pure Tamarind Extract",
+        "Wood-Pressed Sesame Oil",
+        "Peanuts",
+        "Roasted Fenugreek Powder",
+        "Mustard Seeds",
+        "Dry Red Chilies",
+        "Curry Leaves"
+      ]
+    },
+    {
+      "id": "prod-8",
+      "name": "Traditional Sambar Powder (Madurai Grandma Recipe)",
+      "description": "An ancient recipe handed down generations. Sourced from organic farm clusters, dry-roasted under early morning sun rays, and dry-ground in native stone mills to preserve its deep aromatic terpene oils.",
+      "price": 140,
+      "costPrice": 55,
+      "category": "Instant Mix",
+      "images": [
+        "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&auto=format&fit=crop"
+      ],
+      "enabled": true,
+      "stock": 140,
+      "traditionalBenefit": "Supplies natural anti-inflammatory curcumin, improves intestinal gut microbial flora.",
+      "weight": "250g",
+      "ingredients": [
+        "Byadgi Red Chili",
+        "Coriander Seeds",
+        "Fenugreek (Methi)",
+        "Toor Dal",
+        "Curry Leaves",
+        "Turmeric Roots"
+      ]
+    },
+    {
+      "id": "prod-9",
+      "name": "Hygienic Sundakkai Vathal (Salt Cured Turkey Berry)",
+      "description": "Carefully chosen organic Turkey Berries brined in fresh sour buttermilk, salted cleanly, and dried hygienically inside solar houses to protect against street dust and pests. Deep fry in hot oil to make a perfect crunchy rice side.",
+      "price": 85,
+      "costPrice": 35,
+      "category": "Vathal Varieties",
+      "images": [
+        "https://images.unsplash.com/photo-1541832676-9b763b0239ab?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1596797038530-2c107229654b?q=80&w=600&auto=format&fit=crop"
+      ],
+      "enabled": true,
+      "stock": 220,
+      "traditionalBenefit": "Highly effective in eliminating stomach worms, improves iron counts, and regulates high blood pressure.",
+      "weight": "100g",
+      "ingredients": [
+        "Fresh Turkey Berries (Sundakkai)",
+        "Unrefined Sea Salt",
+        "Sour Spiced Buttermilk"
+      ]
+    },
+    {
+      "id": "prod-10",
+      "name": "Hygienic Manathakkali Vathal (Black Nightshade Berries)",
+      "description": "Savoury, slightly bitter dried medical berries. Cured carefully in low-fat salted yogurt and sun-dried until dry-crisp. Toss in hot ghee or sesame oil and mix with rice or add to appetizing Vatha Kuzhambu.",
+      "price": 85,
+      "costPrice": 35,
+      "category": "Vathal Varieties",
+      "images": [
+        "https://images.unsplash.com/photo-1596797038530-2c107229654b?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1541832676-9b763b0239ab?q=80&w=600&auto=format&fit=crop"
+      ],
+      "enabled": true,
+      "stock": 190,
+      "traditionalBenefit": "Highly recognized in Ayurveda for healing mouth & stomach ulcers, cooling body heat, and improving eye health.",
+      "weight": "100g",
+      "ingredients": [
+        "Black Nightshade Berries (Manathakkali)",
+        "Pure Yogurt",
+        "Sea Salt"
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "id": "ord-101",
+      "customerName": "Aravind Krishnan",
+      "customerEmail": "aravind.k@gmail.com",
+      "customerPhone": "9840245678",
+      "customerAddress": "43, Sannidhi Street, Mylapore, Chennai, TN - 600004",
+      "items": [
+        {
+          "productId": "prod-1",
+          "productName": "Agrahara Divine Ghee Laddu",
+          "price": 320,
+          "quantity": 2,
+          "costPrice": 150
+        },
+        {
+          "productId": "prod-2",
+          "productName": "Temple Puliyodarai Mix (Tamarind Rice Paste)",
+          "price": 180,
+          "quantity": 1,
+          "costPrice": 80
+        }
+      ],
+      "totalPrice": 820,
+      "orderDate": "2026-05-10T11:20:00Z",
+      "status": "Delivered",
+      "paymentMethod": "UPI",
+      "paymentStatus": "Completed",
+      "invoiceNumber": "INV-2026-051",
+      "whatsappSent": true,
+      "emailSent": true
+    },
+    {
+      "id": "ord-102",
+      "customerName": "Meera Deshpande",
+      "customerEmail": "meera.d@yahoo.com",
+      "customerPhone": "9123456780",
+      "customerAddress": "72, Vedic Residency, Erandwane, Pune, MH - 411004",
+      "items": [
+        {
+          "productId": "prod-3",
+          "productName": "Hand-Churned Pure Vedic A2 Cow Ghee",
+          "price": 850,
+          "quantity": 1,
+          "costPrice": 400
+        },
+        {
+          "productId": "prod-4",
+          "productName": "Traditional Sambhar Podi (Grandma's Recipe)",
+          "price": 150,
+          "quantity": 3,
+          "costPrice": 60
+        }
+      ],
+      "totalPrice": 1300,
+      "orderDate": "2026-05-24T16:45:00Z",
+      "status": "Dispatched",
+      "paymentMethod": "COD",
+      "paymentStatus": "Pending",
+      "invoiceNumber": "INV-2026-052",
+      "whatsappSent": false,
+      "emailSent": true
+    }
+  ],
+  "expenses": [
+    {
+      "id": "exp-1",
+      "month": "2026-05",
+      "category": "Temple Ingredients",
+      "amount": 3500,
+      "description": "Bulk green cardamom pods and native organic Jaggery sweetener blocks",
+      "date": "2026-05-12T10:00:00Z"
+    },
+    {
+      "id": "exp-2",
+      "month": "2026-05",
+      "category": "Packaging supplies",
+      "amount": 1500,
+      "description": "Sun-dried banana leaf packings and woven jute carrier bags",
+      "date": "2026-05-18T14:30:00Z"
+    }
+  ],
+  "contactMessages": [
+    {
+      "id": "msg-1",
+      "name": "Ranganatha Prasad S.",
+      "email": "ranga@srirangam.org",
+      "phone": "9444011223",
+      "subject": "Enquiry for Devasthanam feast prasadams",
+      "message": "Greetings. We require 500 units of divine ghee laddus and 150 packs of Sakkarai pongal mix for prasadam distribution on the upcoming Sri Rama Navami. Can we schedule secure Ashram van transport directly?",
+      "date": "2026-05-28T09:12:00Z",
+      "resolved": false
+    },
+    {
+      "id": "msg-2",
+      "name": "Saraswathi Iyer",
+      "email": "iyer.sara@outlook.com",
+      "phone": "9884512345",
+      "subject": "Custom sour citron pickle jars",
+      "message": "Tell me if the temple grandmothers currently hold sun-dried citron or bitter gourd slices preserved inside traditional ceramic Bharani jars. Looking forward to booking bulk quantities.",
+      "date": "2026-05-29T15:00:00Z",
+      "resolved": true
+    }
+  ],
+  "smtpConfig": {
+    "host": "smtp.gmail.com",
+    "port": 465,
+    "secure": true,
+    "username": "shasteyogesh@gmail.com",
+    "senderEmail": "shasteyogesh@gmail.com"
+  },
+  "whatsappConfig": {
+    "apiKey": "EAA12093HBAJHBASDJASND89123612",
+    "phoneId": "331209745",
+    "routingMode": "DirectWeb",
+    "recipientNumber": "918838026509"
+  }
+}
